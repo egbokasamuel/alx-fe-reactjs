@@ -1,22 +1,20 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import WelcomeMessage from './components/WelcomeMessage'
-import Header from './Header';
-import MainContent from './MainContent';
-import Footer from './Footer';
+// import { useState } from "react";
+// import "./App.css";
+import WelcomeMessage from "./components/WelcomeMessage";
+import Header from "./Header";
+import MainContent from "./MainContent";
+import Footer from "./Footer";
 function App() {
-    const [count, setCount] = useState(0)
+  // const [count, setCount] = useState(0);
 
   return (
     <>
-      <div>
-      <Header />
-       <MainContent />
-       <Footer />
+      {/* <div> */}
       <WelcomeMessage />
-      <a href="https://vitejs.dev" target="_blank">
+      <Header />
+      <MainContent />
+      <Footer />
+      {/* <a href="https://vitejs.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
         </a>
         <a href="https://react.dev" target="_blank">
@@ -34,9 +32,9 @@ function App() {
       </div>
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
-      </p>
+      </p> */}
     </>
-  )
+  );
 }
 
-export default App
+export default App;
