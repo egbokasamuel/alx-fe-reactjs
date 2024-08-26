@@ -17,4 +17,4 @@ const RecipeDetails = () => {
   );
 };
 
-export { RecipeDetails };
+export default RecipeDetails;
