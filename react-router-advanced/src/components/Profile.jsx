@@ -1,13 +1,20 @@
-// src/components/ProfileDetails.jsx
 import React from "react";
+import { Routes, Route } from "react-router-dom";
+import ProfileDetails from "./ProfileDetails";
+import ProfileSettings from "./ProfileSettings";
 
-const ProfileDetails = () => {
+const Profile = () => {
   return (
     <div>
-      <h2>Profile Details</h2>
-      <p>Here are the details of your profile.</p>
+      <h1>User Profile</h1>
+      <Routes>
+        {/* Nested route for ProfileDetails */}
+        <Route path="details" element={<ProfileDetails />} />
+        {/* Nested route for ProfileSettings */}
+        <Route path="settings" element={<ProfileSettings />} />
+      </Routes>
     </div>
   );
 };
 
-export default ProfileDetails;
+export default Profile;
