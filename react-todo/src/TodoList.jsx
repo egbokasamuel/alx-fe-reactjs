@@ -1,4 +1,3 @@
-// src/TodoList.jsx
 import React, { useState } from "react";
 
 const TodoList = () => {
@@ -24,7 +23,8 @@ const TodoList = () => {
     );
   };
 
-  const handleDeleteTodo = (id) => {
+  const handleDeleteTodo = (id, e) => {
+    e.stopPropagation();
     setTodos(todos.filter((todo) => todo.id !== id));
   };
 
@@ -35,15 +35,13 @@ const TodoList = () => {
           <li
             key={todo.id}
             onClick={() => handleToggleTodo(todo.id)}
-            style={{ textDecoration: todo.completed ? "line-through" : "none" }}
+            style={{
+              textDecoration: todo.completed ? "line-through" : "none",
+              cursor: "pointer",
+            }}
           >
             {todo.text}
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                handleDeleteTodo(todo.id);
-              }}
-            >
+            <button onClick={(e) => handleDeleteTodo(todo.id, e)}>
               Delete
             </button>
           </li>
