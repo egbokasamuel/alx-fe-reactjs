@@ -1,11 +1,16 @@
-import React from "react";
-import TodoList from "./TodoList";
+import TodoList from "./components/TodoList";
+import { useState } from "react";
 
 function App() {
+  const [todos, setTodos] = useState([
+    { id: 1, title: "Lorem ipsum", completed: false },
+    { id: 2, title: "dolor sit amet", completed: false },
+  ]);
   return (
-    <div className="App">
-      <TodoList />
-    </div>
+    <>
+      <TodoList todos={todos} setTodos={setTodos} />
+      <AddTodoForm todos={todos} setTodos={setTodos} />
+    </>
   );
 }
 

@@ -1,41 +1,39 @@
-import React from "react";
+import TodoList from "./TodoList";
 import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import TodoList from "../TodoList";
 
-test("renders TodoList component and initial todos", () => {
-  render(<TodoList />);
-  expect(screen.getByText(/Learn React/i)).toBeInTheDocument();
-  expect(screen.getByText(/Build a Todo List/i)).toBeInTheDocument();
+test("renders TodoList component with demo todos", () => {
+  const todos = [
+    { id: 1, title: "Lorem ipsum", completed: false },
+    { id: 2, title: "dolor sit amet", completed: false },
+  ];
+  render(<TodoList todos={todos} />);
+  expect(screen.getByText("Lorem ipsum")).toBeInTheDocument();
+  expect(screen.getByText("dolor sit amet")).toBeInTheDocument();
 });
 
-test("adds a new todo item", () => {
-  render(<TodoList />);
-  const input = screen.getByRole("textbox");
-  const button = screen.getByText(/Add Todo/i);
+test("toggling todos", () => {
+  const todos = [{ id: 1, title: "Lorem ipsum", completed: false }];
+  const setTodos = jest.fn();
 
-  fireEvent.change(input, { target: { value: "New Todo" } });
-  fireEvent.click(button);
+  render(<TodoList todos={todos} setTodos={setTodos} />);
 
-  expect(screen.getByText(/New Todo/i)).toBeInTheDocument();
+  const toggle = screen.getByRole("checkbox");
+  fireEvent.click(toggle);
+
+  expect(setTodos).toBeCalledWith([
+    expect.objectContaining({ completed: true }),
+  ]);
 });
 
-test("toggles todo item completion status", () => {
-  render(<TodoList />);
-  const todoItem = screen.getByText(/Learn React/i);
+test("deleting todos", () => {
+  const todos = [{ id: 1, title: "Lorem ipsum", completed: false }];
+  const setTodos = jest.fn();
 
-  fireEvent.click(todoItem);
-  expect(todoItem).toHaveStyle("text-decoration: line-through");
+  render(<TodoList todos={todos} setTodos={setTodos} />);
 
-  fireEvent.click(todoItem);
-  expect(todoItem).toHaveStyle("text-decoration: none");
-});
-
-test("deletes a todo item", () => {
-  render(<TodoList />);
-  const todoItem = screen.getByText(/Learn React/i);
-  const deleteButton = screen.getByText(/Delete/i);
-
+  const deleteButton = screen.getByText("Delete");
   fireEvent.click(deleteButton);
-  expect(todoItem).not.toBeInTheDocument();
+
+  expect(setTodos).toBeCalledWith([]); //after deletion it should be an empty array
 });
