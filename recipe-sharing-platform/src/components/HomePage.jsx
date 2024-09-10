@@ -15,6 +15,8 @@ const HomePage = () => {
       <div className="bg-white shadow-lg rounded-lg p-4 hover:shadow-xl hover:scale-105 transition-transform duration-300">
         {recipes.map((recipe) => (
           <div key={recipe.id} className="bg-white shadow-md rounded-lg p-4">
+            {/* Link to the Recipe Detail Page */}
+            <Link to={`/recipe/${recipe.id}`}></Link>
             <img
               src={recipe.image}
               alt={recipe.title}
