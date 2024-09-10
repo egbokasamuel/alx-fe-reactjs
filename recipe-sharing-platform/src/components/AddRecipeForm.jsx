@@ -37,7 +37,9 @@ const AddRecipeForm = () => {
 
   return (
     <div className="max-w-lg mx-auto mt-10 p-6 bg-white rounded-lg shadow-lg">
-      <h2 className="text-3xl font-bold mb-6">Add New Recipe</h2>
+      <h2 className="text-3xl font-bold mb-6 text-center md:text-left">
+        Add New Recipe
+      </h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <label
@@ -51,7 +53,7 @@ const AddRecipeForm = () => {
             id="title"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline md:w-3/4"
           />
           {errors.title && (
             <p className="text-red-500 text-xs italic">{errors.title}</p>
@@ -69,7 +71,7 @@ const AddRecipeForm = () => {
             id="ingredients"
             value={ingredients}
             onChange={(e) => setIngredients(e.target.value)}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline md:w-3/4"
           />
           {errors.ingredients && (
             <p className="text-red-500 text-xs italic">{errors.ingredients}</p>
@@ -87,7 +89,7 @@ const AddRecipeForm = () => {
             id="preparationSteps"
             value={preparationSteps}
             onChange={(e) => setPreparationSteps(e.target.value)}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline md:w-3/4"
           />
           {errors.preparationSteps && (
             <p className="text-red-500 text-xs italic">
@@ -99,7 +101,7 @@ const AddRecipeForm = () => {
         <div className="flex items-center justify-between">
           <button
             type="submit"
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline md:w-1/2"
           >
             Submit Recipe
           </button>
