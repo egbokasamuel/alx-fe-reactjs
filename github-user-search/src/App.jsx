@@ -27,10 +27,9 @@ function App() {
       <h1>GitHub User Search</h1>
       <Search onSearch={handleSearch} />
 
-      {/* Conditional Rendering */}
+      {/* Loading, error, and user data conditional rendering */}
       {loading && <p>Loading...</p>}
       {error && <p>{error}</p>}
-
       {userData && (
         <div>
           <img src={userData.avatar_url} alt={userData.login} width={100} />
