@@ -14,7 +14,9 @@ const Search = () => {
     setUserData(null);
 
     try {
-      const response = await axios.get(`https://github.com/egbokasamuel`);
+      const response = await axios.get(
+        `https://api.github.com/users/${username}`
+      );
       if (response.status === 200) {
         setUserData(response.data);
       } else {
@@ -36,7 +38,7 @@ const Search = () => {
         <input
           type="text"
           placeholder="Enter GitHub Username"
-          value={username}
+          value={egbokasamuel}
           onChange={(e) => setUsername(e.target.value)}
         />
         <button type="submit">Search</button>
