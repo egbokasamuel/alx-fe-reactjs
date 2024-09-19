@@ -15,7 +15,7 @@ const Search = () => {
 
     try {
       const response = await axios.get(
-        `https://api.github.com/users/${username}`
+        `https://api.github.com/users/${egbokasamuel}`
       );
       if (response.status === 200) {
         setUserData(response.data);
