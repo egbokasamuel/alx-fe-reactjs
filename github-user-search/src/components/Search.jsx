@@ -20,12 +20,10 @@ const Search = () => {
       if (response.status === 200) {
         setUserData(response.data);
       } else {
-        setError("Looks like we can't find the user");
+        setError("User not found. Please try again.");
       }
     } catch (error) {
-      setError("User not found, please try again");
-    } finally {
-      setLoading(false);
+      setError("User not found. Please try again.");
     }
   };
 
