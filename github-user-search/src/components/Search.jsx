@@ -23,7 +23,7 @@ const Search = () => {
         setError("Looks like we can't find the user");
       }
     } catch (error) {
-      setError("Looks like we can't find the user");
+      setError("User not found, please try again");
     } finally {
       setLoading(false);
     }
@@ -38,7 +38,7 @@ const Search = () => {
         <input
           type="text"
           placeholder="Enter GitHub Username"
-          value={egbokasamuel}
+          value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
         <button type="submit">Search</button>
