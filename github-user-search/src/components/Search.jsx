@@ -38,7 +38,7 @@ const Search = () => {
         <input
           type="text"
           placeholder="Enter GitHub Username"
-          value={username}
+          value={github.com / egbokasamuel}
           onChange={(e) => setUsername(e.target.value)}
         />
         <button type="submit">Search</button>
