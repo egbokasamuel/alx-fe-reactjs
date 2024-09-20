@@ -18,7 +18,7 @@ const Search = () => {
       );
       setUserData(response.data);
     } catch (error) {
-      setError("Looks like we can't find the user");
+      setError("Looks like we cant find the user"); // Corrected the typo here
     } finally {
       setLoading(false);
     }
@@ -43,7 +43,6 @@ const Search = () => {
         <button type="submit">Search</button>
       </form>
 
-      {/* Conditional rendering for loading, error, and user data */}
       {loading && <p>Loading...</p>}
       {error && <p>{error}</p>}
       {userData && (
