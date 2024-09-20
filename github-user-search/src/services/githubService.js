@@ -13,7 +13,7 @@ export const fetchUserData = async (username, location, minRepos) => {
 
     // Add minimum repository count to the query if it exists
     if (minRepos) {
-      query += `+repos:>${minRepos}`;
+      query += `+repos:>=${minRepos}`; // Corrected to '>=', not '>'
     }
 
     // GitHub Search API URL
