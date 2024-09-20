@@ -9,101 +9,97 @@ const Search = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    fetchUserData();
-  };
-
-  const fetchUserData = async () => {
+  const handleSearch = async () => {
     setLoading(true);
     setError("");
     setUserData(null);
 
+    // Construct the query
+    let query = `q=${username}`;
+    if (location) {
+      query += `+location:${location}`;
+    }
+    if (minRepos) {
+      query += `+repos:>=${minRepos}`;
+    }
+
     try {
       const response = await axios.get(
-        `https://api.github.com/search/users?q=location:${location}+repos:>=${minRepos}`
+        `https://api.github.com/search/users?${query}`
       );
       setUserData(response.data.items);
     } catch (error) {
-      setError("Error fetching user data");
+      setError("Looks like we cant find users with that criteria");
     } finally {
       setLoading(false);
     }
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    handleSearch();
+  };
+
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">GitHub Advanced User Search</h1>
-      <form onSubmit={handleSubmit} className="mb-4">
-        <div className="mb-2">
-          <label
-            className="block text-gray-700 font-bold mb-1"
-            htmlFor="location"
-          >
-            Location:
-          </label>
-          <input
-            type="text"
-            id="location"
-            value={location}
-            onChange={(e) => setLocation(e.target.value)}
-            placeholder="Enter location"
-            className="border rounded px-2 py-1"
-          />
-        </div>
-        <div className="mb-2">
-          <label
-            className="block text-gray-700 font-bold mb-1"
-            htmlFor="minRepos"
-          >
-            Minimum Repositories:
-          </label>
-          <input
-            type="number"
-            id="minRepos"
-            value={minRepos}
-            onChange={(e) => setMinRepos(e.target.value)}
-            placeholder="Min Repos"
-            className="border rounded px-2 py-1"
-          />
-        </div>
+    <div className="max-w-md mx-auto">
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <input
+          type="text"
+          placeholder="Enter GitHub Username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          className="w-full p-2 border border-gray-300 rounded"
+        />
+        <input
+          type="text"
+          placeholder="Location"
+          value={location}
+          onChange={(e) => setLocation(e.target.value)}
+          className="w-full p-2 border border-gray-300 rounded"
+        />
+        <input
+          type="number"
+          placeholder="Minimum Repositories"
+          value={minRepos}
+          onChange={(e) => setMinRepos(e.target.value)}
+          className="w-full p-2 border border-gray-300 rounded"
+        />
         <button
           type="submit"
-          className="bg-blue-500 text-white px-4 py-2 rounded"
+          className="w-full bg-blue-500 text-white p-2 rounded"
         >
           Search
         </button>
       </form>
 
-      {loading && <p>Loading...</p>}
-      {error && <p className="text-red-500">{error}</p>}
+      {/* Display loading, error or user data */}
+      {loading && <p className="text-center">Loading...</p>}
+      {error && <p className="text-center text-red-500">{error}</p>}
       {userData && (
-        <div>
-          <h2 className="text-xl font-semibold mb-2">Search Results:</h2>
-          <ul>
-            {userData.map((user) => (
-              <li key={user.id} className="mb-2">
-                <img
-                  src={user.avatar_url}
-                  alt={user.login}
-                  width={50}
-                  className="rounded-full mr-2"
-                />
+        <ul className="mt-4">
+          {userData.map((user) => (
+            <li
+              key={user.id}
+              className="flex items-center space-x-4 p-2 border-b"
+            >
+              <img
+                src={user.avatar_url}
+                alt={user.login}
+                className="w-12 h-12 rounded-full"
+              />
+              <div>
+                <h2 className="font-semibold">{user.login}</h2>
                 <a
                   href={user.html_url}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  {user.login}
+                  Visit Profile
                 </a>
-                <p className="text-gray-600">{user.location}</p>
-                <p className="text-gray-600">
-                  {user.public_repos} Repositories
-                </p>
-              </li>
-            ))}
-          </ul>
-        </div>
+              </div>
+            </li>
+          ))}
+        </ul>
       )}
     </div>
   );
