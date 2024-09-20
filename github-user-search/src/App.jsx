@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Search from "./components/Search";
 import { fetchUserData } from "./services/githubService";
-import index from "./index.css";
+import "./index.css";
 
 function App() {
   const [userData, setUserData] = useState(null);
@@ -25,7 +25,6 @@ function App() {
 
   return (
     <div>
-      <index.css />
       <h1>GitHub User Search</h1>
       <Search onSearch={handleSearch} />
 

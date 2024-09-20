@@ -2,6 +2,7 @@ import axios from "axios";
 
 // Function to fetch GitHub users based on a search query
 export const fetchUserData = async (username, location, minRepos) => {
+  const apiKey = import.meta.env.VITE_GITHUB_API_KEY;
   try {
     // Construct the query for the GitHub Search API
     let query = `q=${username}`;
