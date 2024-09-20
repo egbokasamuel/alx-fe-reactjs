@@ -7,7 +7,7 @@ const Search = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const handleSearch = async (username) => {
+  const fetchUserData = async (username) => {
     setLoading(true);
     setError("");
     setUserData(null);
@@ -18,7 +18,7 @@ const Search = () => {
       );
       setUserData(response.data);
     } catch (error) {
-      setError("Looks like we cant find the user"); // Corrected the typo here
+      setError("Looks like we cant find the user");
     } finally {
       setLoading(false);
     }
@@ -27,7 +27,7 @@ const Search = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (username) {
-      handleSearch(username);
+      fetchUserData(username); // Call fetchUserData function
     }
   };
 
